@@ -1,0 +1,56 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+ "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui">
+<h:head>
+	<title>Facelet Title</title>
+	<meta content="text/html; charset=UTF-8" http-equiv="Content-Type" />
+	<meta name="viewport" content="width=Device-width, initial-scale=1" />
+
+	<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+
+	<h:outputStylesheet library="css" name="bootstrap.min.css" />
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+</h:head>
+<h:body>
+	<div class="jumbotron text-center">
+		<h1>Win32Product Uygulamarı</h1>
+		<p>Makinede yüklü olan programları aşağıdaki listeden görebilirsiniz.</p>
+	</div>
+	<div class="container">
+		<p>Aramak istediğiniz uygulamayı yazınız</p>
+		<input class="form-control" id="myInput" type="text"
+			placeholder="Ara.."></input> <br></br>
+
+	</div>
+	<h:dataTable id="singleDT" value="#{winproduct.winproduct}" var="win"
+		border="3" class="table table-bordered table-striped">
+
+
+		<p:column>
+			<f:facet name="header">
+				<h:outputText value="Uygulama Ismi" />
+			</f:facet>
+			<h:outputText value="#{win.win32Product}" />
+		</p:column>
+
+	</h:dataTable>
+
+<script>
+$(document).ready(function(){
+  $("#myInput").on("keyup", function() {
+    var value = $(this).val().toLowerCase();
+    $("#singleDT tr").filter(function() {
+      $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+    });
+  });
+});
+</script>
+
+</h:body>
+</html>
